@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hearts Set Apart ♥️🔥</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #4c2c72;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .verse-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+    .buttons {
+      margin-top: 20px;
+    }
+    button, input {
+      font-size: 1rem;
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #a464ea;
+      color: white;
+      cursor: pointer;
+    }
+    input {
+      background: white;
+      color: #333;
+    }
+    a {
+      display: inline-block;
+      margin: 10px;
+      color: white;
+      text-decoration: underline;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 300px;
+      background: white;
+      color: black;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hearts Set Apart ♥️ 🔥</h1>
+  <h2>Verse of the Day</h2>
+  <div class="verse-box" id="verseBox">Loading...</div>
+
+  <div>
+    <h2>🔎 Search by Topic</h2>
+    <input id="topicInput" type="text" placeholder="e.g., joy, healing, fear"/>
+    <button onclick="searchTopic()">Search</button>
+    <iframe id="topicFrame" style="display: none;"></iframe>
+  </div>
+
+  <div class="buttons">
+    <button onclick="shareWhatsapp()">📤 Share to WhatsApp</button>
+    <button onclick="requestNotification()">🔔 Enable Daily Reminder</button>
+  </div>
+
+  <a href="https://chat.whatsapp.com/B8VFLMixMEcKlAWkzh8wyU?mode=ac_t" target="_blank">Join Group 💬</a>
+  <a href="https://whatsapp.com/channel/0029VbAUzil6LwHj6vltjC28" target="_blank">Join Channel 📣</a>
+
+  <script>
+    // 🔥 Fetch Verse of the Day
+    async function getVerseOfDay() {
+      try {
+        const res = await fetch('https://beta.ourmanna.com/api/v1/get?format=text');
+        const text = await res.text();
+        document.getElementById('verseBox').innerText = text;
+      } catch {
+        document.getElementById('verseBox').innerText = 'Unable to load verse.';
+      }
+    }
+
+    getVerseOfDay();
+
+    // 🔍 Topic search using OpenBible
+    function searchTopic() {
+      const topic = document.getElementById("topicInput").value.trim().toLowerCase();
+      if (topic.length === 0) return;
+      const frame = document.getElementById("topicFrame");
+      frame.src = `https://www.openbible.info/topics/${encodeURIComponent(topic)}`;
+      frame.style.display = "block";
+    }
+
+    // 📤 Share to WhatsApp
+    function shareWhatsapp() {
+      const verse = document.getElementById("verseBox").innerText;
+      const url = encodeURIComponent(window.location.href);
+      const message = encodeURIComponent("📖 Today's verse:\n" + verse + "\nJoin us:\nhttps://chat.whatsapp.com/B8VFLMixMEcKlAWkzh8wyU?mode=ac_t");
+      window.open(`https://wa.me/?text=${message}`, '_blank');
+    }
+
+    // 🔔 Daily Reminder
+    function requestNotification() {
+      if ('Notification' in window && navigator.serviceWorker) {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            navigator.serviceWorker.register('sw.js'); // Dummy placeholder
+            new Notification("Reminder set for your Verse of the Day 💜");
+          }
+        });
+      } else {
+        alert("Your browser doesn't support notifications.");
+      }
+    }
+  </script>
+</body>
+</html>
