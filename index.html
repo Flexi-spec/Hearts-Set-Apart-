@@ -1,126 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hearts Set Apart ♥️🔥</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #4c2c72;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    .verse-box {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 500px;
-    }
-    .buttons {
-      margin-top: 20px;
-    }
-    button, input {
-      font-size: 1rem;
-      margin: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background-color: #a464ea;
-      color: white;
-      cursor: pointer;
-    }
-    input {
-      background: white;
-      color: #333;
-    }
-    a {
-      display: inline-block;
-      margin: 10px;
-      color: white;
-      text-decoration: underline;
-    }
-    iframe {
-      border: none;
-      width: 100%;
-      height: 300px;
-      background: white;
-      color: black;
-      margin-top: 10px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hearts Set Apart ♥️🔥</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  section {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  /* 🌌 Glowy Purple Theme (Pages 1 & 2) */
+  .purple-theme {
+    background: radial-gradient(circle at top, #5b3a88, #3a2560);
+    color: white;
+    text-align: center;
+  }
+  .glow-btn {
+    background-color: #a464ea;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 0 10px #a464ea, 0 0 20px #a464ea;
+    transition: transform 0.2s;
+  }
+  .glow-btn:hover {
+    transform: scale(1.05);
+  }
+  .verse-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 500px;
+  }
+  iframe {
+    border: none;
+    width: 100%;
+    height: 300px;
+    background: white;
+    color: black;
+    margin-top: 10px;
+  }
+  /* 👑 Royal Gold Theme (Page 3) */
+  .gold-theme {
+    background: linear-gradient(135deg, gold, #d4af37);
+    color: black;
+    text-align: center;
+  }
+  .gold-btn {
+    background: black;
+    color: gold;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+    border: 2px solid gold;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px;
+    transition: all 0.3s ease;
+  }
+  .gold-btn:hover {
+    background: gold;
+    color: black;
+  }
+</style>
 </head>
 <body>
+
+<!-- 🌌 PAGE 1: Hearts Set Apart -->
+<section id="page1" class="purple-theme">
   <h1>Hearts Set Apart ♥️ 🔥</h1>
   <h2>Verse of the Day</h2>
   <div class="verse-box" id="verseBox">Loading...</div>
 
-  <div>
-    <h2>🔎 Search by Topic</h2>
-    <input id="topicInput" type="text" placeholder="e.g., joy, healing, fear"/>
-    <button onclick="searchTopic()">Search</button>
-    <iframe id="topicFrame" style="display: none;"></iframe>
+  <button class="glow-btn" onclick="shareWhatsapp()">📤 Share to WhatsApp</button>
+  <button class="glow-btn" onclick="requestNotification()">🔔 Enable Daily Reminder</button>
+  <br>
+  <button class="glow-btn" onclick="showPage('page2')">🔎 Search by Topic</button>
+  <button class="glow-btn" onclick="showPage('page3')">⏳ 1 Hour with God</button>
+
+  <div style="margin-top:20px;">
+    <a href="https://chat.whatsapp.com/B8VFLMixMEcKlAWkzh8wyU?mode=ac_t" target="_blank" style="color:white;text-decoration:underline;">Join Group 💬</a><br>
+    <a href="https://whatsapp.com/channel/0029VbAUzil6LwHj6vltjC28" target="_blank" style="color:white;text-decoration:underline;">Join Channel 📣</a>
   </div>
+</section>
 
-  <div class="buttons">
-    <button onclick="shareWhatsapp()">📤 Share to WhatsApp</button>
-    <button onclick="requestNotification()">🔔 Enable Daily Reminder</button>
+<!-- 🌌 PAGE 2: Topic Search -->
+<section id="page2" class="purple-theme">
+  <h1>🔎 Search Bible by Topic</h1>
+  <input id="topicInput" type="text" placeholder="Type In a Topic"/>
+  <button class="glow-btn" onclick="searchTopic()">Search</button>
+  <iframe id="topicFrame" style="display: none;"></iframe>
+  <br>
+  <button class="glow-btn" onclick="showPage('page1')">⬅ Back</button>
+</section>
+
+<!-- 👑 PAGE 3: 1 Hour with God -->
+<section id="page3" class="gold-theme">
+  <h1>⏳ 1 Hour with God</h1>
+  <p>Set your daily prayer time and spend an hour in God's presence.</p>
+  <input type="time" id="prayerTime">
+  <button class="gold-btn" onclick="setPrayerTime()">Set Prayer Time</button>
+  <div id="countdown" style="margin-top:15px;font-size:1.2rem;"></div>
+  <div style="margin-top:20px;">
+    <button class="gold-btn" onclick="startHour()">▶ Start 1 Hour</button>
+    <button class="gold-btn" onclick="toggleMusic()">🎵 Toggle Music</button>
   </div>
+  <div id="hourStatus" style="margin-top:20px;"></div>
+  <br>
+  <button class="gold-btn" onclick="showPage('page1')">⬅ Back</button>
+</section>
 
-  <a href="https://chat.whatsapp.com/B8VFLMixMEcKlAWkzh8wyU?mode=ac_t" target="_blank">Join Group 💬</a>
-  <a href="https://whatsapp.com/channel/0029VbAUzil6LwHj6vltjC28" target="_blank">Join Channel 📣</a>
+<script>
+  // 🔄 Page switching
+  function showPage(id) {
+    document.querySelectorAll("section").forEach(sec => sec.style.display = "none");
+    document.getElementById(id).style.display = "block";
+  }
+  showPage('page1'); // default page
 
-  <script>
-    // 🔥 Fetch Verse of the Day
-    async function getVerseOfDay() {
-      try {
-        const res = await fetch('https://beta.ourmanna.com/api/v1/get?format=text');
-        const text = await res.text();
-        document.getElementById('verseBox').innerText = text;
-      } catch {
-        document.getElementById('verseBox').innerText = 'Unable to load verse.';
-      }
+  // 📖 Verse of the Day
+  async function getVerseOfDay() {
+    try {
+      const res = await fetch('https://beta.ourmanna.com/api/v1/get?format=text');
+      const text = await res.text();
+      document.getElementById('verseBox').innerText = text;
+    } catch {
+      document.getElementById('verseBox').innerText = 'Check Your Intenet Connection and Try Again.';
     }
+  }
+  getVerseOfDay();
 
-    getVerseOfDay();
+  // 📤 Share to WhatsApp
+  function shareWhatsapp() {
+    const verse = document.getElementById("verseBox").innerText;
+    const message = encodeURIComponent("📖 Today's verse:\n" + verse + "\nJoin us:\nhttps://chat.whatsapp.com/B8VFLMixMEcKlAWkzh8wyU?mode=ac_t");
+    window.open(`https://wa.me/?text=${message}`, '_blank');
+  }
 
-    // 🔍 Topic search using OpenBible
-    function searchTopic() {
-      const topic = document.getElementById("topicInput").value.trim().toLowerCase();
-      if (topic.length === 0) return;
-      const frame = document.getElementById("topicFrame");
-      frame.src = `https://www.openbible.info/topics/${encodeURIComponent(topic)}`;
-      frame.style.display = "block";
+  // 🔔 Daily Reminder
+  function requestNotification() {
+    if ('Notification' in window && navigator.serviceWorker) {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          navigator.serviceWorker.register('sw.js'); // placeholder
+          new Notification("Reminder set for your Verse of the Day 💜");
+        }
+      });
+    } else {
+      alert("Your browser doesn't support notifications.");
     }
+  }
 
-    // 📤 Share to WhatsApp
-    function shareWhatsapp() {
-      const verse = document.getElementById("verseBox").innerText;
-      const url = encodeURIComponent(window.location.href);
-      const message = encodeURIComponent("📖 Today's verse:\n" + verse + "\nJoin us:\nhttps://chat.whatsapp.com/B8VFLMixMEcKlAWkzh8wyU?mode=ac_t");
-      window.open(`https://wa.me/?text=${message}`, '_blank');
-    }
+  // 🔍 Topic search
+  function searchTopic() {
+    const topic = document.getElementById("topicInput").value.trim().toLowerCase();
+    if (!topic) return;
+    const frame = document.getElementById("topicFrame");
+    frame.src = `https://www.openbible.info/topics/${encodeURIComponent(topic)}`;
+    frame.style.display = "block";
+  }
 
-    // 🔔 Daily Reminder
-    function requestNotification() {
-      if ('Notification' in window && navigator.serviceWorker) {
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            navigator.serviceWorker.register('sw.js'); // Dummy placeholder
-            new Notification("Reminder set for your Verse of the Day 💜");
-          }
-        });
+  // ⏳ 1 Hour with God features
+  let prayerTimer, music;
+  function setPrayerTime() {
+    const time = document.getElementById("prayerTime").value;
+    if (!time) return alert("Please set a time.");
+    const [h, m] = time.split(":").map(Number);
+    const now = new Date();
+    const prayer = new Date();
+    prayer.setHours(h, m, 0, 0);
+    if (prayer <= now) prayer.setDate(prayer.getDate() + 1);
+    const diff = prayer - now;
+    document.getElementById("countdown").innerText = "Prayer time set!";
+    clearInterval(prayerTimer);
+    prayerTimer = setInterval(() => {
+      const remaining = prayer - new Date();
+      if (remaining <= 0) {
+        clearInterval(prayerTimer);
+        alert("It's time for your 1 Hour with God!");
       } else {
-        alert("Your browser doesn't support notifications.");
+        const hrs = Math.floor(remaining / (1000*60*60));
+        const mins = Math.floor((remaining % (1000*60*60)) / (1000*60));
+        const secs = Math.floor((remaining % (1000*60)) / 1000);
+        document.getElementById("countdown").innerText = `Starts in ${hrs}h ${mins}m ${secs}s`;
+      }
+    }, 1000);
+  }
+
+  function startHour() {
+    document.getElementById("hourStatus").innerText = "1 Hour started! Begin with Prayer 🙏 (10 mins)";
+    let stages = ["Prayer 🙏", "Worship 🎶", "Bible Study 📖", "Reflection 📝", "Thanksgiving ❤️", "Intercession 🕊️"];
+    let stageIndex = 0;
+    function nextStage() {
+      if (stageIndex < stages.length) {
+        document.getElementById("hourStatus").innerText = `Now: ${stages[stageIndex]} (10 mins)`;
+        stageIndex++;
+        setTimeout(nextStage, 10*60*1000); // 10 mins each
+      } else {
+        document.getElementById("hourStatus").innerText = "✅ 1 Hour with God completed!";
       }
     }
-  </script>
+    nextStage();
+  }
+
+  function toggleMusic() {
+    if (!music) {
+      music = new Audio("https://www.bensound.com/bensound-music/bensound-sunny.mp3"); // example
+      music.loop = true;
+      music.play();
+    } else {
+      if (music.paused) music.play(); else music.pause();
+    }
+  }
+</script>
 </body>
 </html>
